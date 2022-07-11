@@ -1,1 +1,0 @@
-"D:\virtualbox\VBoxManage.exe" startvm automation --type headless
