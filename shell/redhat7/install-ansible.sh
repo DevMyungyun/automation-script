@@ -2,10 +2,10 @@ hostnamectl set-hostname automation
 
 # Install Basic Tool
 yum update -y
+yum install epel-release -y
 yum install git htop net-tools telnet vim -y
 
 # Install Ansible
-yum install epel-release -y
 yum install ansible -y
 
 # Ansible ADHOC Test

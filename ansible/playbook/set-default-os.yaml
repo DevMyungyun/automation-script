@@ -1,0 +1,23 @@
+---
+- name: Set default OS
+  gather_facts: yes
+  # become: yes
+  # become_user: "{{ BECOME_USER }}"
+  hosts: all
+  tasks:
+    - name: Yum Update
+      command: "yum update -y"
+    
+    - name: Install Epel & Tools
+      command: "yum install epel-release -y"
+
+    - name: Install Tools
+      command: "yum install git htop vim net-tools telnet wget nfs-utils curl -y"
+
+    # - name: Yum Update
+    #   shell: > 
+    #     Yum update -y
+    #   run_once: true
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
