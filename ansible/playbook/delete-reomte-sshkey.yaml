@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: remove remove sshkey in target server
+      lineinfile:
+        path: /root/.ssh/authorized_keys
+        state: absent
+        regexp: 'automation$'
