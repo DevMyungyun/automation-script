@@ -12,7 +12,7 @@ yum install ansible -y
 ansible -m ping localhost
 
 # Alias Setting
-cat << EOF > /root/.bashrc
+cat << EOF >> /root/.bashrc
 # Ansible Command Setting
 alias ap='ansible-playbook'
 alias av='ansible-vault'
