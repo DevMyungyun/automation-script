@@ -1,8 +1,8 @@
 ---
 - name: Exchange Keys between servers
   gather_facts: no
-  become: yes
-  become_user: "{{ BECOME_USER }}"
+  # become: yes
+  # become_user: "{{ BECOME_USER }}"
   hosts: all
   tasks:
     - name: SSH KeyGen command
@@ -21,3 +21,5 @@
       lineinfile:
         dest: /root/.ssh/authorized_keys
         line: "{{ id_pub_stdout }}"
+    # with_items: 
+    #   - "{{ groups['TARGET'] }}"
