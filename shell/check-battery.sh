@@ -10,8 +10,8 @@ fi
 echo $BATTERY_CHECK
 
 if [ 20 -gt $BATTERY_CHECK ]; then
-        echo "NEED TO CHARGE!"
-else
         echo "There is still battery.."
+else
+        echo "NEED TO CHARGE!"
         sendmail { YOUR_EMAIL }  < { EMAIL_CONTENT_TXT_FILE }
 fi
