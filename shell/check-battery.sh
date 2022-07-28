@@ -1,4 +1,17 @@
 #! /bin/bash
+# Cron sends email if there is echo print.
+# need to comment out ehco parts.
+
+# SSMTP File Path: /etc/ssmtp/ssmtp.conf
+# configuration 
+# UseSTARTTLS=YES
+# FromLineOverride=YES
+# root={EMAIL}@gmail.com
+# mailhub=smtp.gmail.com:587
+# AuthUser={EMAIL}@gmail.com
+# AuthPass=[GMAIL_ACCESS_PASSWORD]
+# hostname=[HOSTNAME]
+# UseTLS=yes
 OS=$(cat /etc/*-release)
 if [[ $OS =~ "Ubuntu" ]]; then
         echo "Ubuntu OS"
