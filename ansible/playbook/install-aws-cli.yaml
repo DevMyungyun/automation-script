@@ -1,0 +1,29 @@
+- name: Install AWS CLI
+  gather_facts: No
+  hosts: all
+  become: yes
+  become_user: "{{ BECOME_USER }}"
+  tasks:
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+      ignore_errors: no
+
+    - name: Download AWS Install File
+      get_url:
+        url:  "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        dest: ./
+      become: yes
+      ignore_errors: no
+    
+    - name: Unzip Archive
+      ansible.builtin.unarchive:
+        src: ./awscliv2.zip
+        dest: ./
+      ignore_errors: no
+
+    - name: Install AWS CLI
+      ansible.builtin.command:
+        cmd: ./aws/install
+      ignore_errors: no
