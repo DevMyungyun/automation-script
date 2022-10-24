@@ -1,0 +1,24 @@
+- name: Install terraform
+  gather_facts: No
+  hosts: all
+  become: yes
+  become_user: "{{ BECOME_USER }}"
+  tasks:
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+      ignore_errors: no
+
+    - name: Add terraform repo
+      get_url:
+        url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+        dest: /etc/yum.repos.d/hashicorp.repo
+      become: yes
+      ignore_errors: no
+    
+    - name: Install terraform
+      yum:
+        name: terraform
+        state: latest
+      ignore_errors: no
