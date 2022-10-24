@@ -1,1 +1,6 @@
+# K8S 
 shell/redhat7/install-k8s-*
+
+# Terraform
+*.tfstate.*
+.terraform
