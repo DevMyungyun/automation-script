@@ -1,0 +1,40 @@
+- name: Install terraform
+  gather_facts: No
+  hosts: all
+  become: yes
+  become_user: "{{ BECOME_USER }}"
+  tasks:
+    - name: Get NVM Install File
+      ansible.builtin.uri:
+        url: https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+      ignore_errors: no
+    
+    - name: Register NVM
+      ansible.builtin.command: source ~/.bashrc
+      register: mymotd
+      ignore_errors: no
+
+    - name: Installing Node.js using NVM
+      ansible.builtin.command: nvm ls-remote 
+      register: mymotd
+      ignore_errors: no
+    
+    - name: Installing Node.js using NVM
+      ansible.builtin.command: nvm install 14.20.0
+      register: mymotd
+      ignore_errors: no
+
+    - name: Installing Node.js using NVM
+      ansible.builtin.command: nvm use 14.20.0 
+      register: mymotd
+      ignore_errors: no
+
+    - name: NPM Version Check
+      ansible.builtin.command: npm -v
+      register: mymotd
+      ignore_errors: no
+
+    - name: Node.JS Version Check
+      ansible.builtin.command: node -v
+      register: mymotd
+      ignore_errors: no
