@@ -1,0 +1,35 @@
+---
+# Install AWS CLI
+- name: CentOS 7 
+  include_tasks: centos7.yaml
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+
+- name: Ubuntu 22.04 
+  include_tasks: ubuntu2204.yaml
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_major_version == "22.04"
+
+- name: Download AWS Install File
+  get_url:
+    url:  "{{ DOWNLOAD_URL }}"
+    dest: ./
+  become: true
+  ignore_errors: false
+
+- name: Unzip Archive
+  ansible.builtin.unarchive:
+    src: ./"{{ DOWNLOAD_FILE_NAME }}"
+    dest: ./
+  ignore_errors: false
+
+- name: Install AWS CLI
+  ansible.builtin.command:
+    cmd: ./aws/install
+  ignore_errors: false
+
+- name: AWS CLI Check
+  ansible.builtin.shell: aws --version
+  register: result

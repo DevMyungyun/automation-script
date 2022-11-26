@@ -1,0 +1,11 @@
+---
+base_packages:
+ - git 
+ - htop 
+ - vim 
+ - net-tools 
+ - telnet 
+ - wget 
+ - nfs-utils 
+ - curl 
+ - tree

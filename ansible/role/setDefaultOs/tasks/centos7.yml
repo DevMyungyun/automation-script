@@ -1,0 +1,15 @@
+---
+- name: Upgrade all packages
+  become: true
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+    
+- name: Install Base Packages
+  become: true
+  yum:
+    name: "{{ package }}"
+    state: latest
+  loop: "{{ base_packages }}"
+  loop_control:
+    loop_var: package

@@ -1,0 +1,7 @@
+---
+base_packages:
+  - yum-utils
+  - lvm2
+
+DOWNLOAD_URL: https://download.docker.com/linux/centos/docker-ce.repo
+DOCKER_DATA_PATH: /data/docker
