@@ -14,6 +14,9 @@
 - name: Install yum utils
   become: true
   yum:
-    name: yum-utils
+    name: '{{ item }}'
     state: latest
+  with_items:
+    - yum-utils
+    - unzip
   ignore_errors: false

@@ -39,4 +39,4 @@
       lineinfile:
         dest: /root/.ssh/authorized_keys
         line: "{{ id_pub.stdout }}"
-    when: authorized_keys.stat.exists
+      when: authorized_keys.stat.exists

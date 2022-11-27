@@ -12,17 +12,18 @@
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_major_version == "22.04"
 
-- name: Download AWS Install File
-  get_url:
-    url:  "{{ DOWNLOAD_URL }}"
-    dest: ./
-  become: true
-  ignore_errors: false
+#- name: Download AWS Install File
+#  get_url:
+#    url:  "{{ DOWNLOAD_URL }}"
+#    dest: ./
+#  become: true
+#  ignore_errors: false
 
-- name: Unzip Archive
+- name: Download & Unzip AWS Install File
   ansible.builtin.unarchive:
-    src: ./"{{ DOWNLOAD_FILE_NAME }}"
+    src: "{{ DOWNLOAD_URL }}"
     dest: ./
+    remote_src: yes
   ignore_errors: false
 
 - name: Install AWS CLI
@@ -32,4 +33,3 @@
 
 - name: AWS CLI Check
   ansible.builtin.shell: aws --version
-  register: result
