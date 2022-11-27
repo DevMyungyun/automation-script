@@ -1,0 +1,19 @@
+---
+- name: Upgrade all packages
+  become: true
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+
+# - name: Upgrade all packages, excluding kernel & foo related packages
+#   ansible.builtin.yum:
+#     name: '*'
+#     state: latest
+#     exclude: kernel*,foo*
+
+- name: Install yum utils
+  become: true
+  yum:
+    name: yum-utils
+    state: latest
+  ignore_errors: false

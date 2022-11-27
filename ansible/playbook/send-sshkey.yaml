@@ -16,9 +16,27 @@
       register: id_pub
       run_once: true
     
+    - name: Check authorized_keys File Exists
+      stat:
+        path: /root/.ssh/authorized_keys
+      register: authorized_keys
+
+    - name: Create SSH Directory
+      ansible.builtin.file:
+        path: /root/.ssh
+        state: directory
+        mode: '0700'
+      when: not authorized_keys.stat.exists
+
+    - name: Create authorized_keys file (equivalent to 0644)
+      ansible.builtin.file:
+        path: /root/.ssh
+        state: touch
+        mode: u=rw,g=r,o=r
+      when: not authorized_keys.stat.exists
+
     - name: remote lineinfile for authorized_keys
       lineinfile:
         dest: /root/.ssh/authorized_keys
         line: "{{ id_pub.stdout }}"
-    # with_items: 
-    #   - "{{ groups['TARGET'] }}"
+    when: authorized_keys.stat.exists
