@@ -1,7 +1,8 @@
-STATIC_IP=$0
-GATEWAY_IP=$1
-DNS_IPS=$2
-NETWORK_DEVICE=$3
+STATIC_IP=$1
+GATEWAY_IP=$2
+DNS_1=$3
+DNS_2=$4
+NETWORK_DEVICE=$5
 
 echo "Specified Arguments >>>>>>>>>>>>>>>>"
 echo "STATIC_IP         : $STATIC_IP"
@@ -11,19 +12,20 @@ echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo ""
 echo ""
 
-sudo apt-get update && apt-get upgrade -y
-sudo apt-get install net-tools network-manager -y
-sudo systemctl start NetworkManager.service 
-sudo systemctl enable NetworkManager.service
+sudo mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
+sudo cat > /etc/netplan/00-installer-config.yaml << EOF
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        $NETWORK_DEVICE:
+            addresses:
+                - "$STATIC_IP/24"
+            nameservers:
+                addresses: [$DNS_1, $DNS_2]
+            routes:
+                - to: default
+                  via: $GATEWAY_IP
+EOF
 
-# Check device name
-nmcli connection show
-
-# Create a Static connection
-sudo nmcli con add type ethernet con-name "static-ip" ifname $NETWORK_DEVICE ipv4.method manual ipv4.addresses "$STATIC_IP/24" gw4 $GATEWAY_IP
-
-# Add DNS IP to static-ip
-sudo nmcli con mod static-ip ipv4.dns $GATEWAY_IP
-
-# Activate the Static connection
-sudo nmcli con up id "static-ip"
+sudo netplan apply 
