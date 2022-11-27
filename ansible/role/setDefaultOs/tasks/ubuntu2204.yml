@@ -1,14 +1,10 @@
 ---
 - name: Update and upgrade apt packages
-  become: true
+  become_user: "{{ ubuntu_user }}"
   apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400 # One day
-
-- name: Install Epel & Tools
-  become: true
-  command: "yum install epel-release -y"
 
 - name: Install Base Packages
   become: true

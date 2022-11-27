@@ -7,7 +7,7 @@ DNS_2="8.8.4.4"
 
 sudo sed -i 's/BOOTPROTO/#BOOTPROTO/g'  /etc/sysconfig/network-scripts/ifcfg-$NETWORK_DEVICE
 
-sudo cat << EOF >> /etc/sysconfig/network-scripts/ifcfg-ens33
+sudo cat << EOF >> /etc/sysconfig/network-scripts/ifcfg-$NETWORK_DEVICE
 BOOTPROTO="static"
 PEERROUTES=yes
 IPADDR=$STATIC_IP

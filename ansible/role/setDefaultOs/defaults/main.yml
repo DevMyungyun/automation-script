@@ -9,3 +9,5 @@ base_packages:
  - nfs-utils 
  - curl 
  - tree
+
+ubuntu_user: ubuntu
