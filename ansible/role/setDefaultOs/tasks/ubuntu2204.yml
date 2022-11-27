@@ -1,6 +1,7 @@
 ---
 - name: Update and upgrade apt packages
   become_user: "{{ ubuntu_user }}"
+  become: true
   apt:
     upgrade: yes
     update_cache: yes

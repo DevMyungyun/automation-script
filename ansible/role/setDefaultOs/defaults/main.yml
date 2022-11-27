@@ -5,6 +5,7 @@ base_packages:
  - vim 
  - net-tools 
  - telnet 
+ - nc
  - wget 
  - nfs-utils 
  - curl 

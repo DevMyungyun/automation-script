@@ -1,4 +1,10 @@
 ---
+- name: Install Epel
+  become: true
+  ansible.builtin.yum:
+    name: epel-release
+    state: latest
+
 - name: Upgrade all packages
   become: true
   ansible.builtin.yum:
