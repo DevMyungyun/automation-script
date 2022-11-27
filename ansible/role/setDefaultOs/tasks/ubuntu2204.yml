@@ -1,0 +1,20 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 # One day
+
+- name: Install Epel & Tools
+  become: true
+  command: "yum install epel-release -y"
+
+- name: Install Base Packages
+  become: true
+  apt:
+    name: "{{ package }}"
+    state: latest
+  loop: "{{ base_packages }}"
+  loop_control:
+    loop_var: package
