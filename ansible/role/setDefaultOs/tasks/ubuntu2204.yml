@@ -1,11 +1,11 @@
 ---
 - name: Update and upgrade apt packages
   become_user: "{{ ubuntu_user }}"
-  become: true
   apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400 # One day
+    become: true
 
 - name: Install Base Packages
   become: true

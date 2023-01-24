@@ -1,2 +1,13 @@
 ---
-# tasks file for installDockerCe
+# Install Docker CE 
+- name: CentOS7 
+  include_tasks: centos7.yml
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+
+- name: Ubuntu 22.04 
+  include_tasks: ubuntu2204.yml
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_major_version == "22.04"

@@ -1,0 +1,18 @@
+---
+- name: Install Epel
+  become: true
+  ansible.builtin.yum:
+    name: epel-release
+    state: latest
+
+- name: Check Docker Container Derectory Exists
+  stat:
+    path: /data/docker
+  register: docker_dir
+
+- name: Create Docker Directory
+  ansible.builtin.file:
+    path: /data/docker
+    state: directory
+    mode: '0710'
+  when: not docker_dir.stat.exists
